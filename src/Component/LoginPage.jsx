@@ -3,7 +3,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState({});
@@ -34,18 +34,20 @@ function LoginPage() {
     e.preventDefault();
 
     const validationErrors = validate();
-
     if (Object.keys(validationErrors).length > 0) {
       setError(validationErrors);
-    } else {
-      console.log("Email:", form.email);
-      console.log("Password:", form.password);
-      setIsSubmitted(true);
-      setError({});
-      setForm({ email: "", password: "" });
-
-      navigate("/dashboard"); 
+      return;
     }
+
+   
+    localStorage.setItem("email", form.email);
+    
+    setIsSubmitted(true);
+    setError({});
+    setForm({ email: "", password: "" });
+    
+
+    navigate("/dashboard");
   };
 
   return (
@@ -58,9 +60,7 @@ function LoginPage() {
         <form className="space-y-5" onSubmit={handleSubmit}>
           {/* Email Input */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Email
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Email</label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                 <FaEnvelope />
@@ -81,9 +81,7 @@ function LoginPage() {
 
           {/* Password Input */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Password
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Password</label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                 <FaLock />
@@ -130,3 +128,9 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+
+
+
+
+
