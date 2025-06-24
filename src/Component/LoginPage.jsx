@@ -42,8 +42,6 @@ function LoginPage() {
    
     localStorage.setItem("email", form.email);
     
-
-
     setIsSubmitted(true);
     setError({});
     setForm({ email: "", password: "" });
